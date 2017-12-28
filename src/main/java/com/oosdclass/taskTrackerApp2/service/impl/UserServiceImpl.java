@@ -29,7 +29,31 @@ import com.oosdclass.taskTrackerApp2.dao.UserDAO;
  			 				&& user.getPassword().equals(userFromDb.getPassword())) {
  			 			return true;
  			 		} else {
- 			 			return false;
+ 			 			return false;}
  			 		}
+ 			 		@Override
+ 			 		public boolean doesUserExist(User user) {
+ 			 			
+ 			 			User userFromDb = userDAO.retrieveByUserName(user.getUsername());
+ 			 			
+ 			 			if(userFromDb == null) {
+ 			 				return false;
+ 			 			}
+ 			 				
+ 			 			else {
+ 			 				return true;	 
+ 			 			}
+ 			 			
+ 			 		}
+ 			 		@Override
+ 			 		public boolean isUserAdmin(User user) {
+ 			 			
+ 			 			User userFromDb = userDAO.retrieveByUserName(user.getUsername());
+ 			 			
+ 			 			if(userFromDb.getUsername().equals("admin")){
+ 			 				return true;
+ 			 			}
+ 			 			else {
+ 			 				return false;
  	}
-}
+}}

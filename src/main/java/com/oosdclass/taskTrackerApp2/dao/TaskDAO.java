@@ -10,5 +10,5 @@ public interface TaskDAO {
 	public Task retrieveByTaskID(int taskID);
 
 	public void saveTask(Task task);
-
+    void updateTask(Task task);
 }
