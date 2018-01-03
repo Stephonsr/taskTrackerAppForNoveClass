@@ -71,7 +71,10 @@ public class TaskDAOImpl implements TaskDAO {
 			return null;
 		}
 	}
-
+	//Allows the employee to update task STATUS and ASSIGNED TO
+		//we use two methods - one for assigned to, one for status - in the controller and service
+		//here, we only need one method
+		
 	@Override
 	public void saveTask(Task task) {
 		String sql = "Insert into task" + "(description, assignedTo, status) VALUES (?, ?, ?)";

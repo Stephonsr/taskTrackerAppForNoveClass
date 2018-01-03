@@ -11,6 +11,9 @@ import com.oosdclass.taskTrackerApp2.service.UserService;
 
 @Controller
 public class UserController {
+	
+	
+	//DI/IOC: Autowire the service layer to the UI layer
 	@Autowired
 	UserService userService;
 
@@ -38,17 +41,20 @@ public class UserController {
 				//if user is a valid user then display view Task page
 				if(userService.isUserValid(userLoginFormObject)) {
 					model = new ModelAndView("viewTask");
-					
-				}
-				//else keep them on home page and send an error to display
-				//on page to the user
-				else {
-					model = new ModelAndView("home");
 					model.addObject("error", "Username does not exist");
-					
-				}
-				
-				return model;
+					//Second Check: Is the password correct?
+					} else if(!userService.isUserValid(userLoginFormObject)) {
+						model = new ModelAndView("home");
+						model.addObject("error", "User input is not valid");
+					//Third Check: Is the user an admin?
+					} else if(userService.isUserAdmin(userLoginFormObject)){
+						model = new ModelAndView("redirect:/adminTasks");
+					//Passed all the checks, send to employee task page
+					} else {
+						model = new ModelAndView("redirect:/empTasks/" + userLoginFormObject.getUsername());
+					}
+					//And then, depending on which conditions were met, display that specified model
+					return model;
 			}
 			
 

@@ -4,12 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Employee Task Management</title>
+<title>Insert title here</title>
 </head>
 <body>
 <div class="container">
+<!--This is button that goes to create task screen -->
 		<div class="row col-lg-6 col-md-offset-2 custyle">
-<!-- Here is the table to display the tasks -->
+		<a href="${contextPath}/createTaskForm"
+						class="btn btn-primary btn-xs pull-right"><b>+</b> Add a new
+						task</a>
+<!-- The table to display list of tasks -->
 			<table class="table table-striped custab">		
 				<thead>
 					<tr>
@@ -22,8 +26,8 @@
 <!-- This is where we are rendering from the array task and displaying on table with help of spring framework -->
 				<c:forEach var="task" items="${taskList}">
 				<tr>
-<!-- The TaskID is hyperlinked and reroutes to the update task page -->
-				<td><a href="${contextPath}/viewTask/${task.taskID}/${username}">${task.taskID}</a></td>
+<!-- note that the taskID is NOT hyperlinked for admin -->
+				<td>${task.taskID}</td>
 				<td>${task.description}</td>
 				<td>${task.status}</td>
 				<td>${task.assignedTo}</td>
